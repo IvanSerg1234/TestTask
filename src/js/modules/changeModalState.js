@@ -42,50 +42,37 @@ const changeModalState = (state) => {
                 }
 
                 console.log(state);
-                validateForm(nextButtonCalc, ['form', 'width', 'height'], false);
-                validateForm(nextButtonProfile, ['type', 'profile'], false);
+                validateForm(nextButtonCalc, ['form', 'width', 'height']);
+                validateForm(nextButtonProfile, ['type', 'profile']);
             });
         });
     }
 
-    // function displayStatusMessage(button, messageClass, messageText) {
-    //     let statusMessage = document.querySelector(messageClass);
-    //     if (!statusMessage) {
-    //         statusMessage = document.createElement('div');
-    //         statusMessage.classList.add(messageClass.replace('.', ''));
-    //         button.parentNode.appendChild(statusMessage);
-    //     }
-    //     statusMessage.textContent = messageText;
-    // }
-
-    function validateForm(button, requiredFields, showMessage) {
+    function validateForm(button, requiredFields) {
         const isValid = requiredFields.every(field => state[field]);
         if (isValid) {
             button.disabled = false;
-            // displayStatusMessage(button, messageClass, '');  // Clear message if valid
         } else {
             button.disabled = true;
-            if (showMessage) {
-                // displayStatusMessage(button, messageClass, message.required);  // Show message if invalid
-            }
-        }
+        }   
+        return isValid;
     }
 
-    // nextButtonCalc.addEventListener('click', (e) => {
-    //     validateForm(nextButtonCalc, ['form', 'width', 'height'], '.status-calc', true);
-    //     if (!nextButtonCalc.disabled) {
-    //         document.querySelector('.popup_calc').style.display = 'none';
-    //         document.querySelector('.popup_calc_profile').style.display = 'block';
-    //     }
-    // });
+    nextButtonCalc.addEventListener('click', () => {
+        validateForm(nextButtonCalc, ['form', 'width', 'height'], '.status-calc', true);
+        if (!nextButtonCalc.disabled) {
+            document.querySelector('.popup_calc').style.display = 'none';
+            document.querySelector('.popup_calc_profile').style.display = 'block';
+        }
+    })
 
-    // nextButtonProfile.addEventListener('click', (e) => {
-    //     validateForm(nextButtonProfile, ['type', 'profile'], '.status-profile', true);
-    //     if (!nextButtonProfile.disabled) {
-    //         document.querySelector('.popup_calc_profile').style.display = 'none';
-    //         document.querySelector('.popup_calc_end').style.display = 'block';
-    //     }
-    // });
+    nextButtonProfile.addEventListener('click', () => {
+        validateForm(nextButtonProfile, ['type', 'profile'], '.status-profile', true);
+        if (!nextButtonProfile.disabled) {
+            document.querySelector('.popup_calc_profile').style.display = 'none';
+            document.querySelector('.popup_calc_end').style.display = 'block';
+        }
+    });
 
     bindActionToElems('click', windowForm, 'form');
     bindActionToElems('input', windowWidth, 'width');
@@ -93,8 +80,8 @@ const changeModalState = (state) => {
     bindActionToElems('change', windowType, 'type');
     bindActionToElems('change', windowProfile, 'profile');
 
-    validateForm(nextButtonCalc, ['form', 'width', 'height'], '.status-calc', false);
-    validateForm(nextButtonProfile, ['type', 'profile'], '.status-profile', false);
+    validateForm(nextButtonCalc, ['form', 'width', 'height']);
+    validateForm(nextButtonProfile, ['type', 'profile']);
 };
 
 export default changeModalState;
