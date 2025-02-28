@@ -15,12 +15,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display
 
     function showTabContent(i = 0) {
         content[i].style.display = display;
-        content[i].classList.add('animated', 'fadeIn')
         tab[i].classList.add(activeClass);
-
-        content[i].addEventListener('animationend', () => {
-            content[i].classList.remove('animated', 'fadeIn');
-        }, {once: true})
     }
 
     hideTabContent();
